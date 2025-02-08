@@ -81,9 +81,9 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
     // 播放音频的函数
     const playAudio = useCallback((url?: string) => {
-        const audioUrl = url || currentQuestion?.audioUrl;
-        if (audioUrl) {
-            const audio = new Audio(audioUrl);
+        const audioToPlay = url || (currentQuestion as BaseQuestion & { audioUrl?: string })?.audioUrl;
+        if (audioToPlay) {
+            const audio = new Audio(audioToPlay);
             audio.play().catch(error => {
                 console.error('Failed to play audio:', error);
             });
@@ -115,8 +115,8 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
     // 自动播放音频（第三题）
     useEffect(() => {
-        if (wordState.currentStage === 2 && currentQuestion?.audioUrl) {
-            playAudio(currentQuestion.audioUrl);
+        if (wordState.currentStage === 2 && (currentQuestion as BaseQuestion & { audioUrl?: string })?.audioUrl) {
+            playAudio((currentQuestion as BaseQuestion & { audioUrl?: string }).audioUrl);
         }
     }, [wordState.currentStage, currentQuestion, playAudio]);
 
@@ -217,7 +217,8 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
                 return (
                     <div className="text-center mb-6">
                         <button 
-                            onClick={() => currentQuestion?.audioUrl && playAudio(currentQuestion.audioUrl)}
+                            onClick={() => (currentQuestion as BaseQuestion & { audioUrl?: string })?.audioUrl && 
+                                playAudio((currentQuestion as BaseQuestion & { audioUrl?: string }).audioUrl)}
                             className="p-4 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
