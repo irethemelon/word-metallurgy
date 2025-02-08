@@ -21,10 +21,10 @@ const STAGE_NAMES = [
 ];
 
 // 正确答案音效
-const SUCCESS_SOUND = new Audio('/audio/correct.mp3');
+const SUCCESS_SOUND = new Audio('https://vol-v6.bczcdn.com/r/2nwxhrx8372d6j2ad4hvge9zah6xpkqy.mp3');
 
 // 错误音效
-const ERROR_SOUND = new Audio('/audio/error.mp3');
+const ERROR_SOUND = new Audio('https://vol-v6.bczcdn.com/r/nlz8ecaz656yg6as8vw52xk37k7jusv4.mp3');
 
 export const QuestionModal: React.FC<QuestionModalProps> = ({
     wordId,
@@ -143,50 +143,42 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
         }
     };
 
-    // 处理配对题的点击
-    const handlePairClick = (text: string, type: 'english' | 'chinese') => {
-        if (currentQuestion?.isPairMatching && currentQuestion.pairs) {
-            setSelectedPair(prev => {
-                const newPair = { ...prev };
-                newPair[type] = text;
+    // 处理配对题点击
+    const handlePairClick = (value: string, type: 'english' | 'chinese') => {
+        if (!currentQuestion?.isPairMatching || !currentQuestion.pairs) return;
 
-                // 如果两个都选中了
-                if (newPair.english && newPair.chinese) {
-                    // 找到对应的配对
-                    const matchingPair = currentQuestion.pairs.find(
-                        p => p.english === newPair.english && p.chinese === newPair.chinese
-                    );
+        setSelectedPair(prev => {
+            const newPair = { ...prev, [type]: value };
 
-                    if (matchingPair) {
-                        // 配对成功
-                        if (matchingPair.audioUrl) {
-                            playAudio(matchingPair.audioUrl);
-                        }
-                        setCompletedPairs(prev => {
-                            const newSet = new Set(prev);
-                            newSet.add(matchingPair.id);
-                            
-                            // 如果完成了所有配对
-                            if (newSet.size === currentQuestion.pairs.length) {
-                                setTimeout(() => {
-                                    playSuccessAndSubmit(wordId, wordState.currentStage + 1, true);
-                                }, 1000);
-                            }
-                            
-                            return newSet;
-                        });
-                    } else {
-                        // 配对失败
-                        playErrorSound();
+            // 如果已经选择了一对
+            if (newPair.english && newPair.chinese) {
+                const matchedPair = currentQuestion.pairs.find(
+                    pair => pair.english === newPair.english && pair.chinese === newPair.chinese
+                );
+
+                if (matchedPair) {
+                    // 配对成功
+                    setCompletedPairs(prev => new Set(prev).add(matchedPair.id));
+                    if (matchedPair.audioUrl) {
+                        playAudio(matchedPair.audioUrl);
                     }
 
-                    // 重置选择
-                    return {};
+                    // 检查是否完成所有配对
+                    const newCompletedPairs = new Set([...completedPairs, matchedPair.id]);
+                    if (newCompletedPairs.size === currentQuestion.pairs.length) {
+                        // 所有配对完成，播放正确音效并延迟提交
+                        setTimeout(() => {
+                            playSuccessAndSubmit(wordId, wordState.currentStage + 1, true);
+                        }, 1000);
+                    }
+                } else {
+                    // 配对失败
+                    playErrorSound();
                 }
-
-                return newPair;
-            });
-        }
+                return {}; // 重置选择
+            }
+            return newPair;
+        });
     };
 
     const handleMultiSelectSubmit = () => {
@@ -219,7 +211,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
             case 1: // 看义知形
             case 5: // 知变形
                 return <div className="text-xl text-center mb-6 leading-relaxed">
-                    {currentQuestion.questionText}
+                    {currentQuestion?.questionText}
                 </div>;
             case 2: // 听音知形
                 return (
@@ -237,7 +229,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
             case 4: // 知搭配
             case 6: // 知辨析
                 return <div className="text-xl text-center mb-6 leading-relaxed">
-                    {currentQuestion.question}
+                    {currentQuestion?.question}
                 </div>;
             default:
                 return null;

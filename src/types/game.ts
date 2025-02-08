@@ -52,6 +52,7 @@ interface BaseQuestion {
     pairs?: MatchingPair[];  // 配对题的配对项
     isMultiSelect?: boolean; // 是否多选题
     isPairMatching?: boolean; // 是否配对题
+    audioUrl?: string;       // 添加音频 URL
 }
 
 // 单词的完整题目集
