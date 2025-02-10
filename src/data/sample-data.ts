@@ -35,7 +35,7 @@ const sampleWords: WordData[] = [
         word: 'book',
         audioResources: {
             pronunciation: {
-                url: '/audio/book/pronunciation.mp3',
+                url: 'https://vol.bczcdn.com/r/us_book_20250210142208335_6179de6c320e5317d54e.mp3',
                 duration: 1
             },
             sentences: [
@@ -51,7 +51,7 @@ const sampleWords: WordData[] = [
                 {
                     id: '1',
                     type: 1,
-                    question: '请选择单词的正确释义',
+                    question: '请选择单词正确的释义：I want to borrow a book from the library.',
                     options: [
                         { id: '1', text: 'n.书', isCorrect: true },
                         { id: '2', text: 'n.电脑', isCorrect: false },
@@ -81,8 +81,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: '4',
-                    type: 4,
+                    id: '5',
+                    type: 5,
                     question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
@@ -114,8 +114,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: '5',
-                    type: 5,
+                    id: '4',
+                    type: 4,
                     question: '请将英文短语与中文释义配对',
                     isPairMatching: true,
                     options: [], // Adding empty options array since this is a pair matching question
@@ -210,7 +210,7 @@ const sampleWords: WordData[] = [
         word: 'forge',
         audioResources: {
             pronunciation: {
-                url: '/audio/forge/pronunciation.mp3',
+                url: 'https://vol.bczcdn.com/r/us_forge_20250210142351341_7cf2ae022b417616376f.mp3',
                 duration: 1
             },
             sentences: [
@@ -226,7 +226,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q1',
                     type: 1,
-                    question: '请选择单词的正确释义',
+                    question: '请选择单词的正确释义：They forged a close friendship over the years.',
                     options: [
                         {
                             id: 'o1',
@@ -292,8 +292,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q4',
-                    type: 4,
+                    id: 'q5',
+                    type: 5,
                     question: '请选择该单词的所有释义（共4个）',
                     isMultiSelect: true,
                     options: [
@@ -325,8 +325,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q5',
-                    type: 5,
+                    id: 'q4',
+                    type: 4,
                     question: '请匹配下列词组和翻译',
                     isPairMatching: true,
                     options: [], // Adding empty options array since this is a pair matching question
@@ -348,6 +348,12 @@ const sampleWords: WordData[] = [
                             english: 'forge a knife',
                             chinese: '锻造一把刀',
                             audioUrl: 'https://vol.bczcdn.com/r/us_forge_a_20250207162406025_c21dbc5052d0325a6343.mp3'
+                        },
+                        {
+                            id: 'p4',
+                            english: 'a metal forge',
+                            chinese: '金属锻造车间',
+                            audioUrl: 'https://vol.bczcdn.com/r/us_a_metal_20250210140914467_04409463c7db5dc6f46b.mp3'
                         }
                     ]
                 },
@@ -386,36 +392,18 @@ const sampleWords: WordData[] = [
                             english: 'forge v.伪造',
                             chinese: '_________ a document',
                             audioUrl: 'https://vol.bczcdn.com/r/us_forge_a_20250207170018496_33ff391ba9adc3f9a2f5.mp3',
-                            wordInfo: {
-                                word: 'forge',
-                                meaning: '伪造',
-                                partOfSpeech: 'v.',
-                                example: 'It is illegal to forge official documents.'
-                            }
                         },
                         {
                             id: 'p2',
                             english: 'fabricate v.捏造',
                             chinese: '_________ a story',
                             audioUrl: 'https://vol.bczcdn.com/r/us_fabricate_a_20250207170019959_66062f9912d6f01a8c57.mp3',
-                            wordInfo: {
-                                word: 'fabricate',
-                                meaning: '捏造',
-                                partOfSpeech: 'v.',
-                                example: 'He was accused of fabricating evidence.'
-                            }
                         },
                         {
                             id: 'p3',
                             english: 'lie v.撒谎',
                             chinese: '_________ about his age',
                             audioUrl: 'https://vol.bczcdn.com/r/us_lie_about_20250208134145027_88c5d95460dc14f0edc9.mp3',
-                            wordInfo: {
-                                word: 'lie',
-                                meaning: '撒谎',
-                                partOfSpeech: 'v.',
-                                example: 'It is wrong to lie about your qualifications.'
-                            }
                         }
                     ]
                 }
@@ -433,7 +421,7 @@ const sampleWords: WordData[] = [
         word: 'steep',
         audioResources: {
             pronunciation: {
-                url: '/audio/steep/pronunciation.mp3',
+                url: 'https://vol.bczcdn.com/r/us_steep_20250210142426448_67ba8e02ece6a0073e5d.mp3',
                 duration: 1
             },
             sentences: [
@@ -449,7 +437,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q1',
                     type: 1,
-                    question: '请选择单词的正确释义',
+                    question: '请选择单词的正确释义：The mountain was too steep for beginners to climb.',
                     options: [
                         {
                             id: 'o1',
@@ -515,8 +503,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q4',
-                    type: 4,
+                    id: 'q5',
+                    type: 5,
                     question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
@@ -548,8 +536,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q5',
-                    type: 5,
+                    id: 'q4',
+                    type: 4,
                     question: '请匹配下列词组和翻译',
                     isPairMatching: true,
                     options: [], // Adding empty options array since this is a pair matching question
@@ -656,7 +644,7 @@ const sampleWords: WordData[] = [
         word: 'aggregate',
         audioResources: {
             pronunciation: {
-                url: '/audio/aggregate/pronunciation.mp3',
+                url: 'https://vol.bczcdn.com/r/us_aggregate_20250210142427083_49a6d88f6fe7dee3f927.mp3',
                 duration: 1
             },
             sentences: [
@@ -672,7 +660,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q1',
                     type: 1,
-                    question: '请选择单词的正确释义',
+                    question: '请选择单词的正确释义：The aggregate revenue of the company has increased.',
                     options: [
                         {
                             id: 'o1',
@@ -738,8 +726,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q4',
-                    type: 4,
+                    id: 'q5',
+                    type: 5,
                     question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
@@ -771,8 +759,8 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q5',
-                    type: 5,
+                    id: 'q4',
+                    type: 4,
                     question: '请匹配下列词组和翻译',
                     isPairMatching: true,
                     options: [], // Adding empty options array since this is a pair matching question
@@ -879,7 +867,7 @@ const sampleWords: WordData[] = [
         word: 'deliberate',
         audioResources: {
             pronunciation: {
-                url: '/audio/deliberate/pronunciation.mp3',
+                url: 'https://vol.bczcdn.com/r/us_deliberate_20250210142427760_71196f48b6579d6e2dbb.mp3',
                 duration: 1
             },
             sentences: [
@@ -895,7 +883,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q1',
                     type: 1,
-                    question: '请选择单词的正确释义',
+                    question: '请选择单词的正确释义：His actions were deliberate, not accidental.',
                     options: [
                         {
                             id: 'o1',
@@ -961,7 +949,7 @@ const sampleWords: WordData[] = [
                     ]
                 },
                 {
-                    id: 'q4',
+                    id: 'q5',
                     type: 4,
                     question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,

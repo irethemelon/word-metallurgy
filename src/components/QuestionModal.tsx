@@ -14,8 +14,8 @@ const STAGE_NAMES = [
     '看形知义',
     '看义知形',
     '听音知形',
-    '知多义',
     '知搭配',
+    '知多义',
     '知变形',
     '知辨析'
 ];
@@ -60,7 +60,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
     // 初始化配对题的数据
     useEffect(() => {
-        if ((wordState.currentStage === 4 || wordState.currentStage === 6) && currentQuestion?.isPairMatching && currentQuestion.pairs) {
+        if ((wordState.currentStage === 3 || wordState.currentStage === 6) && currentQuestion?.isPairMatching && currentQuestion.pairs) {
             const pairs = currentQuestion.pairs;
             const shuffledEnglish = [...pairs].sort(() => Math.random() - 0.5);
             const shuffledChinese = [...pairs].sort(() => Math.random() - 0.5);
