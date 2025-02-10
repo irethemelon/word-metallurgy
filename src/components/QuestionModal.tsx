@@ -152,7 +152,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
             // 如果已经选择了一对
             if (newPair.english && newPair.chinese) {
-                const matchedPair = currentQuestion.pairs.find(
+                const matchedPair = currentQuestion.pairs?.find(
                     pair => pair.english === newPair.english && pair.chinese === newPair.chinese
                 );
 
@@ -165,7 +165,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
                     // 检查是否完成所有配对
                     const newCompletedPairs = new Set([...completedPairs, matchedPair.id]);
-                    if (newCompletedPairs.size === currentQuestion.pairs.length) {
+                    if (newCompletedPairs.size === currentQuestion.pairs?.length) {
                         // 所有配对完成，播放正确音效并延迟提交
                         setTimeout(() => {
                             playSuccessAndSubmit(wordId, wordState.currentStage + 1, true);
