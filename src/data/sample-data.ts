@@ -83,7 +83,7 @@ const sampleWords: WordData[] = [
                 {
                     id: '4',
                     type: 4,
-                    question: '请选择单词的所有正确含义',
+                    question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
                         {
@@ -294,7 +294,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q4',
                     type: 4,
-                    question: '请选择该单词的其他释义',
+                    question: '请选择该单词的所有释义（共4个）',
                     isMultiSelect: true,
                     options: [
                         {
@@ -517,7 +517,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q4',
                     type: 4,
-                    question: '请选择该单词的其他释义',
+                    question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
                         {
@@ -740,7 +740,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q4',
                     type: 4,
-                    question: '请选择该单词的其他释义',
+                    question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
                         {
@@ -963,7 +963,7 @@ const sampleWords: WordData[] = [
                 {
                     id: 'q4',
                     type: 4,
-                    question: '请选择该单词的其他释义',
+                    question: '请选择该单词的所有释义（共3个）',
                     isMultiSelect: true,
                     options: [
                         {
@@ -1147,4 +1147,4 @@ const initialGameState: GameState = {
     currentWord: null
 };
 
-export { gameConfig, sampleWords, initialGameState };
+export { gameConfig, sampleWords as sampleData, initialGameState };

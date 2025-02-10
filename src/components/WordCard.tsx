@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { WordLearningState } from '../types/game';
 
@@ -27,26 +27,74 @@ export const WordCard: React.FC<WordCardProps> = ({
     config
 }) => {
     const currentColor = STAGE_COLORS[wordState.currentStage];
-    const progress = (wordState.timerState.timeRemaining / 300) * 100;
+    const [timeProgress, setTimeProgress] = useState((wordState.timerState.timeRemaining / 300) * 100);
+    const [startTime, setStartTime] = useState(Date.now());
+    const [isCompleted, setIsCompleted] = useState(false);
+    const [isTimedOut, setIsTimedOut] = useState(false);
+
+    // 检查是否完成所有题目
+    useEffect(() => {
+        if (wordState.currentStage === 7) { // 第七题的索引是7
+            setIsCompleted(true);
+            setTimeProgress(100);
+            setIsTimedOut(false); // 重置超时状态
+        } else {
+            setIsCompleted(false);
+        }
+    }, [wordState.currentStage]);
+
+    // 重置计时器
+    useEffect(() => {
+        if (!isCompleted) {
+            setStartTime(Date.now());
+            setTimeProgress(100);
+            setIsTimedOut(false); // 重置超时状态
+        }
+    }, [wordState.currentStage, isCompleted]);
+
+    // 倒计时效果
+    useEffect(() => {
+        if (isCompleted) return; // 如果完成所有题目，不启动倒计时
+
+        const duration = 60000; // 60秒
+
+        const timer = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(0, 100 - (elapsed / duration) * 100);
+            
+            if (remaining <= 0) {
+                clearInterval(timer);
+                setTimeProgress(0);
+                setIsTimedOut(true); // 设置超时状态
+            } else {
+                setTimeProgress(remaining);
+            }
+        }, 100);
+
+        return () => clearInterval(timer);
+    }, [startTime, isCompleted]);
 
     return (
         <motion.div
+            className={`relative w-64 h-32 rounded-lg shadow-lg transition-all ${
+                isTimedOut ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-xl'
+            }`}
+            style={{ backgroundColor: currentColor }}
+            onClick={() => !isTimedOut && onClick()}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: isTimedOut ? 0.5 : 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="relative w-64 h-32 rounded-lg shadow-lg cursor-pointer"
-            style={{ backgroundColor: currentColor }}
-            onClick={onClick}
+            transition={{ duration: 0.3 }}
         >
             {/* 倒计时进度条 */}
             <div className="absolute top-0 left-0 w-full h-2 bg-gray-200 rounded-t-lg overflow-hidden">
                 <motion.div
                     className="h-full bg-blue-500"
-                    initial={{ width: `${progress}%` }}
+                    initial={{ width: '100%' }}
                     animate={{ 
-                        width: `${progress}%`,
-                        backgroundColor: progress < 20 ? '#EF4444' : '#3B82F6'
+                        width: `${timeProgress}%`,
+                        backgroundColor: isCompleted ? '#22C55E' : timeProgress < 20 ? '#EF4444' : '#3B82F6'
                     }}
                     transition={{ duration: 0.3 }}
                 />

@@ -207,31 +207,46 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
         switch (wordState.currentStage) {
             case 0: // 看形知义
             case 3: // 知多义
-                return <div className="text-3xl font-bold text-center mb-6">{word.word}</div>;
+                return (
+                    <>
+                        <p className="text-gray-600 mb-4">{currentQuestion?.question}</p>
+                        <div className="text-3xl font-bold text-center mb-6">{word.word}</div>
+                    </>
+                );
             case 1: // 看义知形
             case 5: // 知变形
-                return <div className="text-xl text-center mb-6 leading-relaxed">
-                    {currentQuestion?.questionText}
-                </div>;
+                return (
+                    <>
+                        <p className="text-gray-600 mb-4">{currentQuestion?.question}</p>
+                        <div className="text-xl text-center mb-6 leading-relaxed">
+                            {currentQuestion?.questionText}
+                        </div>
+                    </>
+                );
             case 2: // 听音知形
                 return (
-                    <div className="text-center mb-6">
-                        <button 
-                            onClick={() => (currentQuestion as BaseQuestion & { audioUrl?: string })?.audioUrl && 
-                                playAudio((currentQuestion as BaseQuestion & { audioUrl?: string }).audioUrl)}
-                            className="p-4 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                            </svg>
-                        </button>
-                    </div>
+                    <>
+                        <p className="text-gray-600 mb-4">{currentQuestion?.question}</p>
+                        <div className="text-center mb-6">
+                            <button 
+                                onClick={() => (currentQuestion as BaseQuestion & { audioUrl?: string })?.audioUrl && 
+                                    playAudio((currentQuestion as BaseQuestion & { audioUrl?: string }).audioUrl)}
+                                className="p-4 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </>
                 );
             case 4: // 知搭配
             case 6: // 知辨析
-                return <div className="text-xl text-center mb-6 leading-relaxed">
-                    {currentQuestion?.question}
-                </div>;
+                return (
+                    <>
+                        <p className="text-gray-600 mb-4">{currentQuestion?.question}</p>
+                    </>
+                );
             default:
                 return null;
         }
